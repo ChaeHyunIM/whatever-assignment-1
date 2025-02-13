@@ -14,15 +14,15 @@
 
 #### 기본
 
-![alt text](image.png)
+![alt text](assignment-1.png)
 
 #### 구매
 
-![alt text](image-1.png)
+![alt text](assignment-2.png)
 
 #### 결과 확인
 
-![alt text](image-2.png)
+![alt text](assignment-3.png)
 
 ### 기본 요구사항
 
