@@ -1,42 +1,224 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.lotto-app {
+  width: 40vw;
+  background-color: white;
   padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.lotto-price {
+  margin-bottom: 20px;
+}
+
+.lotto-price label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.input-wrapper input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.input-wrapper button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.input-wrapper button:hover {
+  background-color: #0056b3;
+}
+
+.lotto-results {
+  margin-top: 20px;
+}
+
+.lotto-results h2 {
+  margin-bottom: 10px;
+}
+
+.lotto-numbers {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.lotto-numbers span {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lotto-results button {
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.lotto-results button:hover {
+  background-color: #218838;
+}
+
+.reset {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.reset:hover {
+  background-color: #c82333;
+}
+
+.winning-numbers {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.winning-numbers h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.winning-numbers .lotto-numbers {
+  margin-bottom: 0;
+}
+
+.lotto-results {
+  margin-top: 20px;
+}
+
+.lotto-results h2 {
+  margin-bottom: 10px;
+}
+
+.lotto-ticket {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.lotto-numbers {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.lotto-numbers span {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.lotto-numbers span.win {
+  background-color: #28a745;
+}
+
+.lotto-ticket .result {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+}
+
+.lotto-results button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.rank-count {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.rank-count h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.rank-count table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rank-count th,
+.rank-count td {
+  padding: 10px;
   text-align: center;
+  border: 1px solid #ddd;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.rank-count th {
+  background-color: #007bff;
+  color: white;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.rank-count td {
+  background-color: white;
 }
