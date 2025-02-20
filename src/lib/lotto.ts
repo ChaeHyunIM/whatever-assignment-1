@@ -1,3 +1,9 @@
+import {
+  LOTTO_NUMBERS_COUNT,
+  LOTTO_NUMBERS_WITH_BONUS_COUNT,
+  MAX_LOTTO_NUMBER,
+  MIN_LOTTO_NUMBER,
+} from "../constants/lotto";
 import type {
   LottoNumbers,
   Rank,
@@ -5,41 +11,37 @@ import type {
   WinningLottoNumbers,
 } from "../types/lotto";
 import { findDuplicates } from "./utils/array";
+import { generateRandomNumber } from "./utils/number";
 
 export const generateLottoNumbers = (): LottoNumbers => {
-  const numbers: LottoNumbers = [0, 0, 0, 0, 0, 0];
   const uniqueNumbers = new Set<number>();
-  while (uniqueNumbers.size < numbers.length) {
-    uniqueNumbers.add(Math.floor(Math.random() * 45) + 1);
+
+  while (uniqueNumbers.size < LOTTO_NUMBERS_COUNT) {
+    uniqueNumbers.add(generateRandomNumber(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
   }
 
-  const sortedNumbers = Array.from(uniqueNumbers).sort((a, b) => a - b);
+  const sortedNumbers = Array.from(uniqueNumbers).sort(
+    (a, b) => a - b
+  ) as LottoNumbers;
 
-  for (let i = 0; i < numbers.length; i++) {
-    numbers[i] = sortedNumbers[i];
-  }
-
-  return numbers;
+  return sortedNumbers;
 };
 
 export const generateWinningNumbers = (): WinningLottoNumbers => {
-  const mainNumbers: LottoNumbers = [0, 0, 0, 0, 0, 0];
-  const uniqueNumbers = new Set<number>();
+  const uniqueNumbersSet = new Set<number>();
 
-  while (uniqueNumbers.size < 6) {
-    uniqueNumbers.add(Math.floor(Math.random() * 45) + 1);
+  while (uniqueNumbersSet.size < LOTTO_NUMBERS_WITH_BONUS_COUNT) {
+    uniqueNumbersSet.add(
+      generateRandomNumber(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+    );
   }
 
-  const sortedNumbers = Array.from(uniqueNumbers).sort((a, b) => a - b);
+  const uniqueNumbers = Array.from(uniqueNumbersSet);
 
-  for (let i = 0; i < mainNumbers.length; i++) {
-    mainNumbers[i] = sortedNumbers[i];
-  }
-
-  let bonusNumber: number;
-  do {
-    bonusNumber = Math.floor(Math.random() * 45) + 1;
-  } while (uniqueNumbers.has(bonusNumber)); // Ensure bonus number is unique
+  const [n1, n2, n3, n4, n5, n6, bonusNumber] = uniqueNumbers;
+  const mainNumbers: LottoNumbers = [n1, n2, n3, n4, n5, n6].sort(
+    (a, b) => a - b
+  ) as LottoNumbers;
 
   return { mainNumbers, bonusNumber };
 };
@@ -74,4 +76,21 @@ export const rankLottoWinningResult = (
   }
 
   return rank > 0 ? (`${rank}등` as RankMessage) : "꽝";
+};
+
+export const getRankCounts = (rankMessages: RankMessage[]) => {
+  const rankCountsInit = {
+    "1등": 0,
+    "2등": 0,
+    "3등": 0,
+    "4등": 0,
+    "5등": 0,
+    꽝: 0,
+  };
+  return rankMessages
+    ? rankMessages.reduce((acc, rank) => {
+        acc[rank] = (acc[rank] || 0) + 1;
+        return acc;
+      }, rankCountsInit)
+    : rankCountsInit;
 };

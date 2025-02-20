@@ -1,1 +1,5 @@
 export const LOTTO_PRICE = 1000;
+export const LOTTO_NUMBERS_COUNT = 6;
+export const LOTTO_NUMBERS_WITH_BONUS_COUNT = LOTTO_NUMBERS_COUNT + 1;
+export const MIN_LOTTO_NUMBER = 1;
+export const MAX_LOTTO_NUMBER = 45;

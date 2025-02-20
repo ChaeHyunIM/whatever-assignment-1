@@ -1,29 +1,63 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { LOTTO_PRICE } from "../constants/lotto";
-import { generateLottoNumbers } from "../lib/lotto";
-import type { LottoNumbersSet } from "../types/lotto";
+import {
+  generateLottoNumbers,
+  generateWinningNumbers,
+  getRankCounts,
+  rankLottoWinningResult,
+} from "../lib/lotto";
+import type {
+  LottoNumbers,
+  RankMessage,
+  WinningLottoNumbers,
+} from "../types/lotto";
 
 const useLotto = () => {
-  const [lottoNumbersSet, setLottoNumbersSet] = useState<LottoNumbersSet>([]);
+  const [lottoNumbersList, setLottoNumbersSet] = useState<LottoNumbers[]>([]);
+  const [winningLottoNumbers, setWinningLottoNumbers] =
+    useState<null | WinningLottoNumbers>(null);
+  const [rankMessages, setRankMessages] = useState<null | RankMessage[]>(null);
 
   const generateLotto = (purchaseAmount: number) => {
     const lottoCounts = purchaseAmount / LOTTO_PRICE;
-    const lottoNumbersByLottoCounts: LottoNumbersSet = [];
+    const lottoNumbersByLottoCounts: LottoNumbers[] = [];
     for (let i = 0; i < lottoCounts; i++) {
-      const newNumbers = generateLottoNumbers();
-      lottoNumbersByLottoCounts.push(newNumbers);
+      lottoNumbersByLottoCounts.push(generateLottoNumbers());
     }
     setLottoNumbersSet(lottoNumbersByLottoCounts);
   };
 
-  const reset = () => {
+  const resetLottoNumbersList = () => {
     setLottoNumbersSet([]);
+    setWinningLottoNumbers(null);
+    setRankMessages(null);
   };
 
+  const checkRankMessages = () => {
+    if (lottoNumbersList.length === 0) return;
+    const winningLottoNumbers = generateWinningNumbers();
+    const lottoRankMessages = lottoNumbersList.map((lottoNumbers) => {
+      return rankLottoWinningResult(lottoNumbers, winningLottoNumbers);
+    });
+    setWinningLottoNumbers(generateWinningNumbers);
+    setRankMessages(lottoRankMessages);
+  };
+
+  const rankCounts = useMemo(() => {
+    if (rankMessages === null) {
+      return null;
+    }
+    return getRankCounts(rankMessages);
+  }, [rankMessages]);
+
   return {
-    lottoNumbersSet,
+    lottoNumbersList,
     generateLotto,
-    reset,
+    resetLottoNumbersList,
+    rankMessages,
+    winningLottoNumbers,
+    checkRankMessages,
+    rankCounts,
   };
 };
 
