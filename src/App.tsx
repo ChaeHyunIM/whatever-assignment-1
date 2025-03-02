@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { LOTTO_PRICE } from "./constants/lotto";
 import useLotto from "./hooks/useLotto";
+import { isPurchaseAmountValid } from "./lib/lotto";
 
 function App() {
   const [purchaseAmount, setPurchaseAmount] = useState(0);
@@ -16,10 +17,23 @@ function App() {
   } = useLotto();
 
   const purchaseLotto = (purchaseAmount: number) => {
-    if (!(purchaseAmount % LOTTO_PRICE === 0)) {
-      alert(`금액 ${purchaseAmount}은 1000의 배수가 아닙니다.`);
+    if (!isPurchaseAmountValid(purchaseAmount)) {
+      return;
     }
     generateLotto(purchaseAmount);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    setPurchaseAmount(value);
+
+    if (!isPurchaseAmountValid(value)) {
+      e.target.setCustomValidity(
+        `금액은 ${LOTTO_PRICE}원 단위로 입력해주세요!`
+      );
+    } else {
+      e.target.setCustomValidity("");
+    }
   };
 
   const reset = () => {
@@ -44,7 +58,7 @@ function App() {
             type="number"
             placeholder="금액을 입력하세요"
             value={purchaseAmount > 0 ? purchaseAmount : ""}
-            onChange={(e) => setPurchaseAmount(Number(e.target.value))}
+            onChange={handleInputChange}
           />
           <button>구매</button>
         </div>

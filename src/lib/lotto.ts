@@ -1,6 +1,7 @@
 import {
   LOTTO_NUMBERS_COUNT,
   LOTTO_NUMBERS_WITH_BONUS_COUNT,
+  LOTTO_PRICE,
   MAX_LOTTO_NUMBER,
   MIN_LOTTO_NUMBER,
 } from "../constants/lotto";
@@ -12,6 +13,10 @@ import type {
 } from "../types/lotto";
 import { findDuplicates } from "./utils/array";
 import { generateRandomNumber } from "./utils/number";
+
+export const isPurchaseAmountValid = (purchaseAmount: number) => {
+  return purchaseAmount % LOTTO_PRICE === 0;
+};
 
 export const generateLottoNumbers = (): LottoNumbers => {
   const uniqueNumbers = new Set<number>();
