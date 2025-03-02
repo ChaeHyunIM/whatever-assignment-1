@@ -1,4 +1,4 @@
-export type LottoNumbers = [number, number, number, number, number, number];
+export type LottoNumbers = number[];
 
 export type WinningLottoNumbers = {
   mainNumbers: LottoNumbers;

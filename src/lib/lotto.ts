@@ -20,9 +20,7 @@ export const generateLottoNumbers = (): LottoNumbers => {
     uniqueNumbers.add(generateRandomNumber(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
   }
 
-  const sortedNumbers = Array.from(uniqueNumbers).sort(
-    (a, b) => a - b
-  ) as LottoNumbers;
+  const sortedNumbers = Array.from(uniqueNumbers).sort((a, b) => a - b);
 
   return sortedNumbers;
 };
@@ -38,10 +36,8 @@ export const generateWinningNumbers = (): WinningLottoNumbers => {
 
   const uniqueNumbers = Array.from(uniqueNumbersSet);
 
-  const [n1, n2, n3, n4, n5, n6, bonusNumber] = uniqueNumbers;
-  const mainNumbers: LottoNumbers = [n1, n2, n3, n4, n5, n6].sort(
-    (a, b) => a - b
-  ) as LottoNumbers;
+  const bonusNumber = uniqueNumbers.pop() as number;
+  const mainNumbers = uniqueNumbers.sort((a, b) => a - b) as LottoNumbers;
 
   return { mainNumbers, bonusNumber };
 };

@@ -13,7 +13,7 @@ import type {
 } from "../types/lotto";
 
 const useLotto = () => {
-  const [lottoNumbersList, setLottoNumbersSet] = useState<LottoNumbers[]>([]);
+  const [lottoNumbersList, setLottoNumbersList] = useState<LottoNumbers[]>([]);
   const [winningLottoNumbers, setWinningLottoNumbers] =
     useState<null | WinningLottoNumbers>(null);
   const [rankMessages, setRankMessages] = useState<null | RankMessage[]>(null);
@@ -24,11 +24,11 @@ const useLotto = () => {
     for (let i = 0; i < lottoCounts; i++) {
       lottoNumbersByLottoCounts.push(generateLottoNumbers());
     }
-    setLottoNumbersSet(lottoNumbersByLottoCounts);
+    setLottoNumbersList(lottoNumbersByLottoCounts);
   };
 
   const resetLottoNumbersList = () => {
-    setLottoNumbersSet([]);
+    setLottoNumbersList([]);
     setWinningLottoNumbers(null);
     setRankMessages(null);
   };
